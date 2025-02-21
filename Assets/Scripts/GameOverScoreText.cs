@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PointController : MonoBehaviour
+public class GameOverScoreText : MonoBehaviour
 {
-    public int points;
     // Start is called before the first frame update
+    private int points;
     void Start()
     {
-        points = 0;
+        points = GameObject.Find("Point_Storer").GetComponent<PointController>().points;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Points: " + points;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

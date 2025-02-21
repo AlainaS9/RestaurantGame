@@ -8,6 +8,8 @@ public class CreateCustomer : MonoBehaviour
     private int patienceForms;
     //impatient, moderate, and patient
 
+    public float timeBetweenCustomers;
+
     public bool isCustomerHere;
     private int patience;
     private int linePosition;
@@ -17,8 +19,6 @@ public class CreateCustomer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("Spawn", 2.0f);
-
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 24;
         //temporary framerate just for testing performance
@@ -27,24 +27,20 @@ public class CreateCustomer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isCustomerHere == false)
+        if(!isCustomerHere)
         {
-
-            Invoke("Spawn", 2.0f);
+            isCustomerHere = true;
+            Invoke("Spawn", timeBetweenCustomers);
         }
     }
 
     void Spawn()
     {
-        //spawn in random position that is not already taken out of the three spots
-        //randomize wanted food
-        //randomize patience
         // linePosition = (int)(Random.Range(1.0f, 3.0f));
 
         GameObject newCustomer = Instantiate(customer);
 
         newCustomer.GetComponent<CustomerScript>().setWanted();
-        isCustomerHere = true;
 
     }
 }
