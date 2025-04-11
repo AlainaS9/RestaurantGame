@@ -10,8 +10,7 @@ public class CustomerScript : MonoBehaviour
     private GameObject wantedFood;
     public int patience;
     public GameObject selectObject;
-    public int linePosition;
-
+    public GameObject customerSelector;
 
     public SpriteRenderer spriteRenderer;
     public Sprite customerOption1;
@@ -19,27 +18,52 @@ public class CustomerScript : MonoBehaviour
     public Sprite customerOption3;
     private int customerType;
 
+    public int linePosition;
+
+    AudioSource audioSource;
+
+    public float volume = 0.5f;
+
+
+    /*
+    public enum linePosition
+    {
+        left,
+        middle,
+        right
+    }
+    */
+
+
     // Start is called before the first frame update
     void Start()
     {
-        selectObject = GameObject.Find("Select_Outline");
+        audioSource = GameObject.Find("SFX_Player").GetComponent<AudioSource>();
+        selectObject = GameObject.Find("Food_Select_Outline");
+        customerSelector = GameObject.Find("Customer_Select_Outline");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        changeSprite();
+        /*
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && GameObject.Find("Food_Select_Outline").GetComponent<FoodSelectScript>().isEnabled)
         {
-            Debug.Log(selectObject.GetComponent<SelectScript>().selected);
-            Debug.Log("Checking serve");
-            checkServe();
+            GameObject.Find("Food_Select_Outline").GetComponent<FoodSelectScript>().isEnabled = false;
+            GameObject.Find("Customer_Select_Outline").GetComponent<CustomerSelectScript>().isEnabled = true;
         }
+        else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && GameObject.Find("Food_Select_Outline").GetComponent<CustomerSelectScript>().isEnabled)
+        {
+            wantedFood = selectObject.GetComponent<CustomerSelectScript>().selected;
+        }
+        */
     }
 
     public void setWanted()
     {
         setCustomer();
-        wantedNum = (int)(Random.Range(1.0f, 3.0f));
+        wantedNum = (int)(Random.Range(1.0f, 4.0f));
 
         switch (wantedNum)
         {
@@ -49,25 +73,54 @@ public class CustomerScript : MonoBehaviour
             case 2:
                 wantedFood = GameObject.Find("Food_2");
                 break;
+            case 3:
+                wantedFood = GameObject.Find("Food_3");
+                break;
         }
                 Debug.Log(wantedNum + " and " + wantedFood);
 
-       // GameObject.Find("Customer_Spawner").GetComponent<CreateCustomer>().isCustomerHere = true;
+        // GameObject.Find("Customer_Spawner").GetComponent<CreateCustomer>().isCustomerHere = true;
 
-        GameObject.Find("Wanted_Food").GetComponent<WantedSprites>().setFood(wantedNum);
-        
+        GetComponentInChildren<WantedSprites>().setFood(wantedNum);
+
     }
 
-    void checkServe()
+    public void checkServe()
     {
-        if (selectObject.GetComponent<SelectScript>().selected == wantedFood)
+       // wantedFood = selectObject.GetComponent<FoodSelectScript>().selected;
+        if (selectObject.GetComponent<FoodSelectScript>().selected == wantedFood)
         {
             Debug.Log("Correct!");
             GameObject.Find("Point_Storer").GetComponent<PointController>().points =
                     (int)(GameObject.Find("Point_Storer").GetComponent<PointController>().points + 
                     (GameObject.Find("Timer_Graphic").GetComponent<TimerScript>().timeLeft * 10));
 
-            GameObject.Find("Customer_Spawner").GetComponent<CreateCustomer>().isCustomerHere = false;
+
+
+            if(linePosition == 0)
+            {
+                GameObject.Find("Customer_Spawner_Left").GetComponent<CreateCustomer>().isCustomerHere = false;
+            }
+            else if (linePosition == 1)
+            {
+                GameObject.Find("Customer_Spawner_Middle").GetComponent<CreateCustomer>().isCustomerHere = false;
+            }
+            else if (linePosition == 2)
+            {
+                GameObject.Find("Customer_Spawner_Right").GetComponent<CreateCustomer>().isCustomerHere = false;
+            }
+            else
+            {
+                Debug.Log("ERROR with line position");
+            }
+
+            audioSource.Play();
+            Debug.Log("Play audio serve");
+
+            selectObject.GetComponent<FoodSelectScript>().isEnabled = true;
+            customerSelector.GetComponent<CustomerSelectScript>().isEnabled = false;
+            selectObject.GetComponent<FoodSelectScript>().selected = null;
+
             Destroy(gameObject);
         }
         else
@@ -79,16 +132,41 @@ public class CustomerScript : MonoBehaviour
     public void incorrectServe()
     {
         Debug.Log("Incorrect!");
+
+        selectObject.GetComponent<FoodSelectScript>().isEnabled = true;
+        customerSelector.GetComponent<CustomerSelectScript>().isEnabled = false;
+        selectObject.GetComponent<FoodSelectScript>().selected = null;
+
+        if (linePosition == 0)
+        {
+            GameObject.Find("Customer_Spawner_Left").GetComponent<CreateCustomer>().isCustomerHere = false;
+        }
+        else if (linePosition == 1)
+        {
+            GameObject.Find("Customer_Spawner_Middle").GetComponent<CreateCustomer>().isCustomerHere = false;
+        }
+        else if (linePosition == 2)
+        {
+            GameObject.Find("Customer_Spawner_Right").GetComponent<CreateCustomer>().isCustomerHere = false;
+        }
+        else
+        {
+            Debug.Log("ERROR with line position");
+        }
         // GameObject.Find("Customer_Spawner").GetComponent<CreateCustomer>().isCustomerHere = false;
         Destroy(gameObject);
 
-        //FOR MVP: END GAME
-        DontDestroyOnLoad(GameObject.Find("Point_Storer"));
-        SceneManager.LoadScene("GameOverScene");
+        GameObject.Find("Health").GetComponent<HealthScript>().health--;
+        GameObject.Find("Health").GetComponent<HealthScript>().updateSprites();
     }
     void setCustomer()
     {
         customerType = (int)(Random.Range(1.0f, 4.0f));
+        changeSprite();
+    }
+
+    void changeSprite()
+    {
         switch (customerType)
         {
             case 1:

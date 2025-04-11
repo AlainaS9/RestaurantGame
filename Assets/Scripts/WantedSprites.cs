@@ -7,6 +7,7 @@ public class WantedSprites : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite foodOption1;
     public Sprite foodOption2;
+    public Sprite foodOption3;
     // public Sprite foodOption3;
 
     // Start is called before the first frame update
@@ -31,10 +32,10 @@ public class WantedSprites : MonoBehaviour
             case 2:
                 spriteRenderer.sprite = foodOption2;
                 break;
-        /*    case 3:
-                spriteRenderer.sprite = customerOption3;
+            case 3:
+                spriteRenderer.sprite = foodOption3;
                 break;
-        */
+        
         }
     }
 }

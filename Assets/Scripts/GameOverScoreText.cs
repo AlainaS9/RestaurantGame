@@ -10,7 +10,16 @@ public class GameOverScoreText : MonoBehaviour
     void Start()
     {
         points = GameObject.Find("Point_Storer").GetComponent<PointController>().points;
-        gameObject.GetComponent<TextMeshProUGUI>().text = "Points: " + points;
+        if (gameObject.name == "ScoreText")
+        {
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Score: " + points;
+        }
+        else
+        {
+            GameObject.Find("Score_Storer").GetComponent<ScoreStorer>().newHiScore(points);
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Hi Score: " + GameObject.Find("Score_Storer").GetComponent<ScoreStorer>().hiScore;
+
+        }
     }
 
     // Update is called once per frame

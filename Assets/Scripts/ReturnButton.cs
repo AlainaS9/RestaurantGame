@@ -4,27 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class StartScript : MonoBehaviour
+public class ReturnButton : MonoBehaviour
 {
     public Button button;
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(startGame);
+        if (gameObject.name == "Exit_Button")
+        {
+            gameObject.SetActive(false);
+        }
+        button.onClick.AddListener(returnToStart);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void startGame()
+    void returnToStart ()
     {
-        Debug.Log("pushed!");
-        SceneManager.LoadScene("GameScene");
-
-        if (gameObject.name == "Restart_Button") 
+        SceneManager.LoadScene("StartMenu");
+        if (gameObject.name == "Return_Button")
         {
             DontDestroyOnLoad(GameObject.Find("Score_Storer"));
         }

@@ -10,14 +10,18 @@ public class TimerScript : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Sprite full;
+    public Sprite sevenEighths;
     public Sprite threeQuarters;
+    public Sprite fiveEighths;
     public Sprite half;
+    public Sprite threeEighths;
     public Sprite oneQuarter;
+    public Sprite oneEighth;
     public Sprite empty;
 
     void Start()
         {
-        timeLeft = timerLength;
+
         }
     void Update()
         {
@@ -28,17 +32,33 @@ public class TimerScript : MonoBehaviour
             {
                 spriteRenderer.sprite = full;
             }
-            else if(timeLeft <= ((timerLength * 3) / 4) && (timeLeft > (timerLength / 2)))
+            else if (timeLeft <= ((timerLength * 7) / 8) && timeLeft > (timerLength * 3) / 4)
+            {
+                spriteRenderer.sprite = sevenEighths;
+            }
+            else if(timeLeft <= ((timerLength * 3) / 4) && timeLeft > ((timerLength * 5) / 8))
             {
                 spriteRenderer.sprite = threeQuarters;
             }
-            else if (timeLeft <= (timerLength / 2) && (timeLeft > (timerLength / 4)))
+            else if (timeLeft <= ((timerLength * 5) / 8) && timeLeft > timerLength / 2)
+            {
+                spriteRenderer.sprite = fiveEighths;
+            }
+            else if (timeLeft <= (timerLength / 2) && timeLeft > ((timerLength * 3) / 8))
             {
                 spriteRenderer.sprite = half;
             }
-            else if (timeLeft <= (timerLength / 4) && timeLeft > 0)
+            else if (timeLeft <= ((timerLength * 3) / 8) && timeLeft > timerLength / 4)
+            {
+                spriteRenderer.sprite = threeEighths;
+            }
+            else if (timeLeft <= (timerLength / 4) && timeLeft > ((timerLength * 1) / 8))
             {
                 spriteRenderer.sprite = oneQuarter;
+            }
+            else if (timeLeft <= ((timerLength * 1) / 8) && timeLeft > 0)
+            {
+                spriteRenderer.sprite = oneEighth;
             }
             else if (timeLeft <= 0)
             {
@@ -53,4 +73,25 @@ public class TimerScript : MonoBehaviour
             GetComponentInParent<CustomerScript>().incorrectServe();
         }
         }
+
+    public void setTime()
+    {
+        if (GameObject.Find("Point_Storer").GetComponent<PointController>().points < 1000)
+        {
+            timeLeft = Random.Range(10.0f, 15.0f);
+            
+        }
+        else if (GameObject.Find("Point_Storer").GetComponent<PointController>().points >= 1000 && GameObject.Find("Point_Storer").GetComponent<PointController>().points < 3000)
+        {
+            timeLeft = Random.Range(5.0f, 10.0f);
+        }
+        else if (GameObject.Find("Point_Storer").GetComponent<PointController>().points >= 3000)
+        {
+            timeLeft = Random.Range(2.0f, 5.0f);
+        }
+        timerLength = timeLeft;
+
+
+      //  Debug.Log("Time length is" + timeLeft);
+    }
     }

@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class CreateCustomer : MonoBehaviour
 {
-    private int foodWanted;
-    private int patienceForms;
-    //impatient, moderate, and patient
-
     public float timeBetweenCustomers;
 
     public bool isCustomerHere;
-    private int patience;
-    private int linePosition;
-    private int lineLength;
     public GameObject customer;
+
+    public int linePosition;
+
+
+    public AudioSource audioSource;
+    /*
+    public enum linePosition
+    {
+        left,
+        middle,
+        right
+    }
+    */
+
+    // List<GameObject> customersList;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +45,20 @@ public class CreateCustomer : MonoBehaviour
 
     void Spawn()
     {
-        // linePosition = (int)(Random.Range(1.0f, 3.0f));
-
         GameObject newCustomer = Instantiate(customer);
+        newCustomer.name = "Customer" + linePosition;
+        GameObject.Find("Customer_Controller").GetComponent<CustomerSpawnControl>().customersArray[linePosition] = newCustomer;
+
+        Debug.Log(linePosition + " is " + newCustomer);
 
         newCustomer.GetComponent<CustomerScript>().setWanted();
+        newCustomer.GetComponentInChildren<TimerScript>().setTime();
 
+        newCustomer.transform.position = gameObject.transform.position;
+        newCustomer.GetComponent<CustomerScript>().linePosition = linePosition;
+
+        Debug.Log("Play audio");
+        audioSource.Play();
+        isCustomerHere = true;
     }
 }
