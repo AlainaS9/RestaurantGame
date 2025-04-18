@@ -31,6 +31,8 @@ public class CreateCustomer : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 24;
         //temporary framerate just for testing performance
+
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame

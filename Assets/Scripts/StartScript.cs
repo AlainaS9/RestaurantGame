@@ -22,9 +22,15 @@ public class StartScript : MonoBehaviour
     void startGame()
     {
         Debug.Log("pushed!");
-        SceneManager.LoadScene("GameScene");
-
-        if (gameObject.name == "Restart_Button") 
+        if (SceneManager.GetActiveScene().name == "StartMenu")
+        {
+            SceneManager.LoadScene("TutorialScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("GameScene");
+        }
+            if (gameObject.name == "Restart_Button") 
         {
             DontDestroyOnLoad(GameObject.Find("Score_Storer"));
         }

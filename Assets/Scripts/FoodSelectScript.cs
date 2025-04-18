@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FoodSelectScript : MonoBehaviour
 {
@@ -48,7 +49,14 @@ public class FoodSelectScript : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                ChooseFood();
+                if (SceneManager.GetActiveScene().name == "TutorialScene")
+                {
+                    TutorialChoose();
+                }
+                else
+                {
+                    ChooseFood();
+                }
             }
         }
     }
@@ -84,5 +92,20 @@ public class FoodSelectScript : MonoBehaviour
     public void appear()
     {
         spriteRenderer.sprite = visible;
+    }
+
+    void TutorialChoose()
+    {
+        if(selected == GameObject.Find("Food_2"))
+        {
+            isEnabled = false;
+
+            customerSelector.GetComponent<CustomerSelectScript>().appear();
+            customerSelector.GetComponent<CustomerSelectScript>().isEnabled = true;
+
+            spriteRenderer.sprite = invisible;
+
+            GameObject.Find("Customer_Spawner_Middle").GetComponent<TutorialSpawn>().ActivateTutorial();
+        }
     }
 }

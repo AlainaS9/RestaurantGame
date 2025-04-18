@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomerSelectScript : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class CustomerSelectScript : MonoBehaviour
     public void Select()
     {
         //sets the GameObject selected to the object that is currently hovered over
+
         selected = GameObject.Find("Customer_Controller").GetComponent<CustomerSpawnControl>().customersArray[selectedNum];
 
         Debug.Log(selected);
@@ -86,7 +88,14 @@ public class CustomerSelectScript : MonoBehaviour
         selected = GameObject.Find("Customer_Controller").GetComponent<CustomerSpawnControl>().customersArray[selectedNum];
         if (selected != null)
         {
-            selected.GetComponent<CustomerScript>().checkServe();
+            if (SceneManager.GetActiveScene().name == "TutorialScene")
+            {
+                selected.GetComponent<TutorialCustomer>().checkServe();
+            }
+            else
+            {
+                selected.GetComponent<CustomerScript>().checkServe();
+            }
             isEnabled = false;
 
             foodSelector.GetComponent<FoodSelectScript>().appear();
@@ -102,27 +111,10 @@ public class CustomerSelectScript : MonoBehaviour
         spriteRenderer.sprite = visible;
     }
 
-    /*
-    public void resetSelect()
+    
+    void TutorialSelect()
     {
-        while (selected == null)
-        {
-            spriteRenderer.sprite = invisible;
-            selectedNum++;
-            Debug.Log(selectedNum);
-            if (selectedNum >= upperLimit)
-            {
-                selectedNum = lowerLimit;
-            }
-            selected = GameObject.Find("Customer_Controller").GetComponent<CustomerSpawnControl>().customersArray[selectedNum];
-            transform.position = selected.transform.position;
-        }
-        if (selected != null)
-        {
-            spriteRenderer.sprite = visible;
-        }
-    }
 
-    */
+    }
 
 }

@@ -16,7 +16,9 @@ public class CustomerScript : MonoBehaviour
     public Sprite customerOption1;
     public Sprite customerOption2;
     public Sprite customerOption3;
+    public Sprite customerOptionAlien;
     private int customerType;
+    public bool isAlien;
 
     public int linePosition;
 
@@ -41,6 +43,8 @@ public class CustomerScript : MonoBehaviour
         audioSource = GameObject.Find("SFX_Player").GetComponent<AudioSource>();
         selectObject = GameObject.Find("Food_Select_Outline");
         customerSelector = GameObject.Find("Customer_Select_Outline");
+
+        Debug.Log("Select Object is " + selectObject);
     }
 
     // Update is called once per frame
@@ -162,6 +166,14 @@ public class CustomerScript : MonoBehaviour
     void setCustomer()
     {
         customerType = (int)(Random.Range(1.0f, 4.0f));
+        if ((int)Random.Range(1.0f, 21.0f) < 2) {
+            isAlien = true;
+            customerType = 4;
+        }
+        else
+        {
+            isAlien = false;
+        }
         changeSprite();
     }
 
@@ -177,6 +189,9 @@ public class CustomerScript : MonoBehaviour
                 break;
             case 3:
                 spriteRenderer.sprite = customerOption3;
+                break;
+            case 4:
+                spriteRenderer.sprite = customerOptionAlien;
                 break;
         }
     }

@@ -89,6 +89,12 @@ public class TimerScript : MonoBehaviour
         {
             timeLeft = Random.Range(2.0f, 5.0f);
         }
+
+        if(GetComponentInParent<CustomerScript>().isAlien)
+        {
+            timeLeft = 1.5f;
+        }
+
         timerLength = timeLeft;
 
 
