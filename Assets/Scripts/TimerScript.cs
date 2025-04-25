@@ -25,7 +25,6 @@ public class TimerScript : MonoBehaviour
         }
     void Update()
         {
-        //CHANGE THIS AT SOME POINT, NOT JUST HAVE IT BE IN UPDATE
             if (timeLeft > 0)
             {
                 if(timeLeft >= timerLength)
@@ -70,7 +69,7 @@ public class TimerScript : MonoBehaviour
             }
             if(timeLeft <= 0)
             {
-            GetComponentInParent<CustomerScript>().incorrectServe();
+            GetComponentInParent<CustomerScript>().incorrectServe(true);
         }
         }
 

@@ -56,7 +56,7 @@ public class CustomerSelectScript : MonoBehaviour
 
         }
     }
-
+/*
     public void Select()
     {
         //sets the GameObject selected to the object that is currently hovered over
@@ -82,6 +82,7 @@ public class CustomerSelectScript : MonoBehaviour
             spriteRenderer.sprite = visible;
         }
     }
+*/
 
     void Serve()
     {
@@ -109,12 +110,6 @@ public class CustomerSelectScript : MonoBehaviour
     public void appear()
     {
         spriteRenderer.sprite = visible;
-    }
-
-    
-    void TutorialSelect()
-    {
-
     }
 
 }

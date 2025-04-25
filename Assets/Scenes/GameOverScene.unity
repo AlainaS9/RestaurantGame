@@ -808,7 +808,7 @@ GameObject:
   - component: {fileID: 1192968979}
   - component: {fileID: 1192968978}
   m_Layer: 0
-  m_Name: gameOver
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,7 +875,7 @@ Transform:
   m_GameObject: {fileID: 1192968977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -0.11, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0.02, z: 0}
   m_LocalScale: {x: 0.9437, y: 0.9437, z: 0.9437}
   m_ConstrainProportionsScale: 0
   m_Children: []

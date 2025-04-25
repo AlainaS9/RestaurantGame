@@ -51,17 +51,6 @@ public class CustomerScript : MonoBehaviour
     void Update()
     {
         changeSprite();
-        /*
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && GameObject.Find("Food_Select_Outline").GetComponent<FoodSelectScript>().isEnabled)
-        {
-            GameObject.Find("Food_Select_Outline").GetComponent<FoodSelectScript>().isEnabled = false;
-            GameObject.Find("Customer_Select_Outline").GetComponent<CustomerSelectScript>().isEnabled = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && GameObject.Find("Food_Select_Outline").GetComponent<CustomerSelectScript>().isEnabled)
-        {
-            wantedFood = selectObject.GetComponent<CustomerSelectScript>().selected;
-        }
-        */
     }
 
     public void setWanted()
@@ -95,9 +84,17 @@ public class CustomerScript : MonoBehaviour
         if (selectObject.GetComponent<FoodSelectScript>().selected == wantedFood)
         {
             Debug.Log("Correct!");
-            GameObject.Find("Point_Storer").GetComponent<PointController>().points =
-                    (int)(GameObject.Find("Point_Storer").GetComponent<PointController>().points + 
-                    (GameObject.Find("Timer_Graphic").GetComponent<TimerScript>().timeLeft * 10));
+            if (!isAlien)
+            {
+                GameObject.Find("Point_Storer").GetComponent<PointController>().points =
+                        (int)(GameObject.Find("Point_Storer").GetComponent<PointController>().points +
+                        (GameObject.Find("Timer_Graphic").GetComponent<TimerScript>().timeLeft * 10));
+            }
+            else
+            {
+                GameObject.Find("Point_Storer").GetComponent<PointController>().points =
+                (GameObject.Find("Point_Storer").GetComponent<PointController>().points + 500);
+            }
 
 
 
@@ -129,33 +126,37 @@ public class CustomerScript : MonoBehaviour
         }
         else
         {
-            incorrectServe();
+            incorrectServe(false);
         }
     }
 
-    public void incorrectServe()
+    public void incorrectServe(bool isTimeFail)
     {
         Debug.Log("Incorrect!");
 
-        selectObject.GetComponent<FoodSelectScript>().isEnabled = true;
-        customerSelector.GetComponent<CustomerSelectScript>().isEnabled = false;
-        selectObject.GetComponent<FoodSelectScript>().selected = null;
+        if (!isTimeFail)
+        {
+            selectObject.GetComponent<FoodSelectScript>().isEnabled = true;
+            customerSelector.GetComponent<CustomerSelectScript>().isEnabled = false;
+            selectObject.GetComponent<FoodSelectScript>().selected = null;
 
-        if (linePosition == 0)
-        {
-            GameObject.Find("Customer_Spawner_Left").GetComponent<CreateCustomer>().isCustomerHere = false;
-        }
-        else if (linePosition == 1)
-        {
-            GameObject.Find("Customer_Spawner_Middle").GetComponent<CreateCustomer>().isCustomerHere = false;
-        }
-        else if (linePosition == 2)
-        {
-            GameObject.Find("Customer_Spawner_Right").GetComponent<CreateCustomer>().isCustomerHere = false;
-        }
-        else
-        {
-            Debug.Log("ERROR with line position");
+            if (linePosition == 0)
+            {
+                GameObject.Find("Customer_Spawner_Left").GetComponent<CreateCustomer>().isCustomerHere = false;
+            }
+            else if (linePosition == 1)
+            {
+                GameObject.Find("Customer_Spawner_Middle").GetComponent<CreateCustomer>().isCustomerHere = false;
+            }
+            else if (linePosition == 2)
+            {
+                GameObject.Find("Customer_Spawner_Right").GetComponent<CreateCustomer>().isCustomerHere = false;
+            }
+            else
+            {
+                Debug.Log("ERROR with line position");
+            }
+
         }
         // GameObject.Find("Customer_Spawner").GetComponent<CreateCustomer>().isCustomerHere = false;
         Destroy(gameObject);
@@ -167,6 +168,11 @@ public class CustomerScript : MonoBehaviour
     {
         customerType = (int)(Random.Range(1.0f, 4.0f));
         if ((int)Random.Range(1.0f, 21.0f) < 2) {
+            isAlien = true;
+            customerType = 4;
+        }
+        else if (GameObject.Find("Point_Storer").GetComponent<PointController>().points > 2500 && (int)Random.Range(1.0f, 21.0f) < 8)
+        {
             isAlien = true;
             customerType = 4;
         }
