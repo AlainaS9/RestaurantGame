@@ -22,6 +22,7 @@ public class CustomerSelectScript : MonoBehaviour
     {
         isEnabled = false;
         spriteRenderer.sprite = invisible;
+        spriteRenderer.transform.localScale = new Vector3(1.677841f, 2.28695f, 1);
         selectedNum = 0;
         transform.position = GameObject.Find("Customer_Spawner_Left").transform.position;
     }

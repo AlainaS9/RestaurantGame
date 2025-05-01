@@ -139,7 +139,7 @@ public class CustomerScript : MonoBehaviour
             selectObject.GetComponent<FoodSelectScript>().isEnabled = true;
             customerSelector.GetComponent<CustomerSelectScript>().isEnabled = false;
             selectObject.GetComponent<FoodSelectScript>().selected = null;
-
+        }
             if (linePosition == 0)
             {
                 GameObject.Find("Customer_Spawner_Left").GetComponent<CreateCustomer>().isCustomerHere = false;
@@ -157,7 +157,7 @@ public class CustomerScript : MonoBehaviour
                 Debug.Log("ERROR with line position");
             }
 
-        }
+        
         // GameObject.Find("Customer_Spawner").GetComponent<CreateCustomer>().isCustomerHere = false;
         Destroy(gameObject);
 

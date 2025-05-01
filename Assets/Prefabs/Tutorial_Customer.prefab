@@ -138,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 5072386573913034088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -166.72263, y: 40.75699, z: 0}
+  m_LocalPosition: {x: 152.23715, y: -267.31168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -233,7 +233,7 @@ Animator:
   m_GameObject: {fileID: 5072386573913034088}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8ba7144e495e7df46b9c2a7b2bed7906, type: 2}
+  m_Controller: {fileID: 9100000, guid: 457042a737751e543ba846b9074bd437, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -296,8 +296,8 @@ Transform:
   m_GameObject: {fileID: 5097762302619682912}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.23, y: 1.29, z: 0}
-  m_LocalScale: {x: 0.44165826, y: 0.41505292, z: 1}
+  m_LocalPosition: {x: 3.19, y: 1.25, z: 0}
+  m_LocalScale: {x: 0.5684048, y: 0.52639085, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2250243396097371203}
@@ -343,7 +343,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: fe54070409a31a647a17b8a9d6436878, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d4895a8efc64734082696a350b06d1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -367,9 +367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8328718777902292611}
-  foodOption1: {fileID: 21300000, guid: fe54070409a31a647a17b8a9d6436878, type: 3}
-  foodOption2: {fileID: 21300000, guid: 3db6a9798348d5b4caa8fc85c513877c, type: 3}
-  foodOption3: {fileID: 21300000, guid: 8845f628a958757499c90d9c3af67dea, type: 3}
+  foodOption1: {fileID: 21300000, guid: 5a0519eb03864e643abd81b81912e509, type: 3}
+  foodOption2: {fileID: 21300000, guid: c67f24bc7ef5c7d4ea8940e6291e1a11, type: 3}
+  foodOption3: {fileID: 21300000, guid: 0d4895a8efc64734082696a350b06d1a, type: 3}
 --- !u!1 &9032040569483090056
 GameObject:
   m_ObjectHideFlags: 0
