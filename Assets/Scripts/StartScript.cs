@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class StartScript : MonoBehaviour
 {
     public Button button;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         button.onClick.AddListener(startGame);
+        audioSource = GameObject.Find("SFX_Player_Start").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,8 @@ public class StartScript : MonoBehaviour
 
     void startGame()
     {
+        audioSource.Play();
+        DontDestroyOnLoad(GameObject.Find("SFX_Player_Start"));
         Debug.Log("pushed!");
         if (SceneManager.GetActiveScene().name == "StartMenu")
         {

@@ -48,6 +48,8 @@ public class PauseScript : MonoBehaviour
 
         customerSelector.GetComponent<CustomerSelectScript>().isPaused = true;
         foodSelector.GetComponent<FoodSelectScript>().isPaused = true;
+
+        GameObject.Find("Music_Player").GetComponent<AudioSource>().volume = 0.25f;
     }
 
     void Resume()

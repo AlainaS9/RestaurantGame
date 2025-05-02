@@ -10,7 +10,14 @@ public class ScoreStorer : MonoBehaviour
 
     void Start()
     {
-        hiScore = 0;
+        if (PlayerPrefs.HasKey("hiScore"))
+        {
+            hiScore = (int)PlayerPrefs.GetFloat("hiScore");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("hiScore", 0);
+        }
     }
 
     // Update is called once per frame
@@ -23,7 +30,8 @@ public class ScoreStorer : MonoBehaviour
     {
         if (points > hiScore)
         {
-            hiScore = points;
+            PlayerPrefs.SetFloat("hiScore", points);
+            hiScore = (int)PlayerPrefs.GetFloat("hiScore");
         }
     }
 }

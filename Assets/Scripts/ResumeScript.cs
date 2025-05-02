@@ -37,6 +37,7 @@ public class ResumeScript : MonoBehaviour
         customerSelector.GetComponent<CustomerSelectScript>().isPaused = false;
         foodSelector.GetComponent<FoodSelectScript>().isPaused = false;
 
+        GameObject.Find("Music_Player").GetComponent<AudioSource>().volume = 0.723f;
 
         pauseButton.GetComponent<PauseScript>().isPaused = false;
         Debug.Log("Unpaused!");
